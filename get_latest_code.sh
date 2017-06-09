@@ -22,12 +22,12 @@ mkdir -p "${mirror_dir}"
 mkdir -p "${git_dir}"
 
 pushd "${mirror_dir}" > /dev/null
-wget --mirror --no-parent -A '*.tar.gz' http://www.opensource.apple.com/tarballs/xnu/
+wget --mirror --no-parent http://opensource.apple.com/tarballs/xnu/
 popd > /dev/null
 
 pushd "${git_dir}" > /dev/null
 git init .
-for file in $(ls "${mirror_dir}"/www.opensource.apple.com/tarballs/xnu/*.tar.gz | ${sort} -t- --version-sort -k2,2) ; do
+for file in $(ls "${mirror_dir}"/opensource.apple.com/tarballs/xnu/*.tar.gz | ${sort} -t- --version-sort -k2,2) ; do
     bname="$(basename ${file} .tar.gz)";
     version="${bname#xnu-}"
     commit_message="version ${version}"
